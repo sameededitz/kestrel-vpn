@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('wg_panel_address')->nullable();
             $table->string('wg_panel_password')->nullable();
             $table->text('ovpn_config')->nullable();
+            $table->string('ipsec_server')->nullable();
+            $table->string('ipsec_user')->nullable();
+            $table->string('ipsec_password')->nullable();
+            $table->string('ipsec_key')->nullable();
             $table->timestamps();
 
             $table->foreign('server_id')->references('id')->on('servers')->onDelete('cascade');

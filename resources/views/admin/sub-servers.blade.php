@@ -40,6 +40,7 @@
                         <th scope="col">OVPN User</th>
                         <th scope="col">WG Panel Address</th>
                         <th scope="col">Config</th>
+                        <th scope="col">IPSec User</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -52,6 +53,7 @@
                             <td>{{ $subServers->ovpn_user }}</td>
                             <td>{{ $subServers->wg_panel_address }}</td>
                             <td>{{ Str::limit($subServers->ovpn_config, 10) }}</td>
+                            <td>{{ $subServers->ipsec_user }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <a href="{{ route('edit-sub-server', [$server->id, $subServers->id]) }}"

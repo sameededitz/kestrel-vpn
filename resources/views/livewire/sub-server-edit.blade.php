@@ -35,27 +35,53 @@
                             </div>
                             <div class="col-12">
                                 <label class="form-label">IP Address</label>
-                                <input type="text" wire:model.blur="ip_address" class="form-control" placeholder="IP Address">
+                                <input type="text" wire:model.blur="ip_address" class="form-control"
+                                    placeholder="IP Address">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">OVpn User</label>
-                                <input type="text" wire:model.blur="ovpn_user" class="form-control" placeholder="OVpn User">
+                                <input type="text" wire:model.blur="ovpn_user" class="form-control"
+                                    placeholder="OVpn User">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">OVpn Password</label>
-                                <input type="text" wire:model.blur="ovpn_password" class="form-control" placeholder="OVpn Password">
+                                <input type="text" wire:model.blur="ovpn_password" class="form-control"
+                                    placeholder="OVpn Password">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">WG Panel Address</label>
-                                <input type="text" wire:model.blur="wg_panel_address" class="form-control" placeholder="WG Panel Address">
+                                <input type="text" wire:model.blur="wg_panel_address" class="form-control"
+                                    placeholder="WG Panel Address">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">WG Password</label>
-                                <input type="text" wire:model.blur="wg_panel_password" class="form-control" placeholder="WG Password">
+                                <input type="text" wire:model.blur="wg_panel_password" class="form-control"
+                                    placeholder="WG Password">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">OVpn Config</label>
-                                <textarea name="ovpn_config" wire:model.blur="ovpn_config" class="form-control" cols="10" rows="2" placeholder="OVpn Config"></textarea>
+                                <textarea name="ovpn_config" wire:model.blur="ovpn_config" class="form-control" cols="10" rows="2"
+                                    placeholder="OVpn Config"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">IPSec Server</label>
+                                <input type="text" wire:model.blur="ipsec_server" class="form-control"
+                                    placeholder="IPSec Server">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">IPSec User</label>
+                                <input type="text" wire:model.blur="ipsec_user" class="form-control"
+                                    placeholder="IPSec User">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">IPSec Password</label>
+                                <input type="text" wire:model.blur="ipsec_password" class="form-control"
+                                    placeholder="ipsec Password">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">IPSec Key</label>
+                                <input type="text" wire:model.blur="ipsec_key" class="form-control"
+                                    placeholder="IPSec Key">
                             </div>
                         </div>
                         <div class="col-12 mt-3">

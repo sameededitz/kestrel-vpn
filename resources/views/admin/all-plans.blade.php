@@ -51,7 +51,7 @@
                             <td>{{ $plan->name }}</td>
                             <td>${{ $plan->price }}</td>
                             <td>{{ $plan->description }}</td>
-                            <td>{{ Str::title($plan->duration) }}</td>
+                            <td> {{ $plan->duration }} {{ Str::title($plan->duration_unit) }}</td>
                             <td>{{ Str::title(str_replace('_', ' ', $plan->type)) }}</td>
                             <td>C:{{ $plan->created_at->diffForHumans() }}<br>U:{{ $plan->updated_at->diffForHumans() }}
                             </td>

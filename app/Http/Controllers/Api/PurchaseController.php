@@ -14,8 +14,6 @@ class PurchaseController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'plan_id' => 'required|exists:plans,id',
-            'expires_at' => 'required|date|after:now',
-            'is_active' => 'required|boolean',
         ]);
 
         if ($validator->fails()) {
@@ -37,25 +35,26 @@ class PurchaseController extends Controller
             ], 404);
         }
 
-        $additionalDuration = match ($plan->duration) {
-            'weekly' => now()->addWeek(),
-            'monthly' => now()->addMonth(),
-            '3-month' => now()->addMonths(3),
-            '6-month' => now()->addMonths(6),
-            'yearly' => now()->addYear(),
-            default => now()->addDays(7),
-        };
-
         // Check if the user already has an active purchase
         $activePurchase = $user->purchases()
             ->where('is_active', true)
             ->where('expires_at', '>', now())
             ->first();
 
+        // Calculate new expiration date based on the plan's duration and unit
+        $duration = $plan->duration;
+        $expiresAt = match ($plan->duration_unit) {
+            'day'   => now()->addDays($duration),
+            'week'  => now()->addWeeks($duration),
+            'month' => now()->addMonths($duration),
+            'year'  => now()->addYears($duration),
+            default => now(), // Fallback to current time if unit is invalid
+        };
+
         if ($activePurchase) {
             // Extend the current active purchase expiration date
             $activePurchase->update([
-                'expires_at' => $activePurchase->expires_at->max(now())->add($additionalDuration->diff(now())),
+                'expires_at' => $activePurchase->expires_at->add($expiresAt->diff(now())),
             ]);
 
             $message = 'Purchase extended successfully!';
@@ -64,7 +63,7 @@ class PurchaseController extends Controller
             $activePurchase = $user->purchases()->create([
                 'plan_id' => $plan->id,
                 'started_at' => now(),
-                'expires_at' => $additionalDuration,
+                'expires_at' => $expiresAt,
                 'is_active' => true,
             ]);
 

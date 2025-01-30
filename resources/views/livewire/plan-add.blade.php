@@ -13,26 +13,26 @@
                 <input type="text" wire:model.blur="name" class="form-control" placeholder="Name">
             </div>
             <div class="col-12">
+                <label class="form-label">Description</label>
+                <input type="text" wire:model.blur="description" class="form-control" placeholder="Description">
+            </div>
+            <div class="col-12">
                 <label class="form-label">Price</label>
-                <input type="number" min="0.00" max="10000.00" step="0.01" wire:model.blur="price" class="form-control" placeholder="Price">
+                <input type="number" wire:model.blur="price" class="form-control" placeholder="Price">
             </div>
             <div class="col-12">
                 <label class="form-label">Duration</label>
-                <select wire:model.live="duration" class="form-control" required>
-                    <option selected>Select Duration</option>
-                    <option value="daily"> Daily </option>
-                    <option value="weekly"> Weekly </option>
-                    <option value="monthly"> Monthly </option>
-                    <option value="3-month"> 3 Months </option>
-                    <option value="6-month"> 6 Months </option>
-                    <option value="yearly"> Yearly </option>
-                    <option value="2-year"> 2 Year </option>
-                    <option value="3-year"> 3 Year </option>
-                </select>
+                <input type="number" wire:model.blur="duration" class="form-control" placeholder="Duration">
             </div>
             <div class="col-12">
-                <label class="form-label">Description</label>
-                <input type="text" wire:model.blur="description" class="form-control" placeholder="Description">
+                <label class="form-label">Duration Unit</label>
+                <select name="duration_unit" wire:model.blur="duration_unit" class="form-select">
+                    <option value="" selected>Select Duration Unit</option>
+                    <option value="day">Day</option>
+                    <option value="week">Week</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
+                </select>
             </div>
             <div class="col-12">
                 <label class="form-label">Type</label>

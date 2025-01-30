@@ -23,6 +23,9 @@ class PlanEdit extends Component
     public $duration;
 
     #[Validate]
+    public $duration_unit;
+
+    #[Validate]
     public $type;
 
     protected function rules()
@@ -30,8 +33,9 @@ class PlanEdit extends Component
         return [
             'name' => 'required|string|max:60',
             'description' => 'nullable|string|max:100',
-            'price' => 'required',
-            'duration' => 'required|in:daily,weekly,monthly,3-month,6-month,yearly,2-year,3-year',
+            'price' => 'required|numeric',
+            'duration' => 'required|numeric',
+            'duration_unit' => 'required|in:day,week,month,year',
             'type' => 'required|in:trial,non_trial',
         ];
     }
@@ -43,6 +47,7 @@ class PlanEdit extends Component
         $this->description = $plan->description;
         $this->price = $plan->price;
         $this->duration = $plan->duration;
+        $this->duration_unit = $plan->duration_unit;
         $this->type = $plan->type;
     }
 
@@ -54,6 +59,7 @@ class PlanEdit extends Component
             'description' => $this->description,
             'price' => $this->price,
             'duration' => $this->duration,
+            'duration_unit' => $this->duration_unit,
             'type' => $this->type,
         ]);
         return redirect()->route('all-plans')->with([

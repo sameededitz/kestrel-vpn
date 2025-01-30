@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2);
-            $table->enum('duration', ['weekly', 'monthly', '3-month', '6-month', 'yearly']);
+            $table->integer('duration');
+            $table->enum('duration_unit', ['day', 'week', 'month', 'year'])->default('day');
             $table->enum('type', ['trial', 'non_trial']);
             $table->timestamps();
         });

@@ -41,24 +41,36 @@ class AllUsers extends Component
 
         $plan = Plan::find($this->plan_id);
 
-        $expirationDate = match ($plan->duration) {
-            'daily' => now()->addDay(),
-            'weekly' => now()->addWeek(),
-            'monthly' => now()->addMonth(),
-            '3-month' => now()->addMonths(3),
-            '6-month' => now()->addMonths(6),
-            'yearly' => now()->addYear(),
-            '2-year' => now()->addYears(2),
-            '3-year' => now()->addYears(3),
-            default => now()->addDays(2),
+        $existingPurchase = $this->selectedUser->purchases()
+            ->where('plan_id', $plan->id)
+            ->where('is_active', true)
+            ->where('expires_at', '>', now())
+            ->first();
+
+        // Calculate new expiration date based on the plan's duration and unit
+        $duration = $plan->duration;
+        $expiresAt = match ($plan->duration_unit) {
+            'day'   => now()->addDays($duration),
+            'week'  => now()->addWeeks($duration),
+            'month' => now()->addMonths($duration),
+            'year'  => now()->addYears($duration),
+            default => now(), // Fallback to current time if unit is invalid
         };
 
-        $this->selectedUser->purchases()->create([
-            'plan_id' => $plan->id,
-            'started_at' => now(),
-            'expires_at' => $expirationDate,
-            'is_active' => true,
-        ]);
+        if ($existingPurchase) {
+            // Extend the existing purchase expiration date
+            $existingPurchase->update([
+                'expires_at' => $existingPurchase->expires_at->add($expiresAt->diff(now())),
+            ]);
+        } else {
+            // Create a new purchase
+            $this->selectedUser->purchases()->create([
+                'plan_id' => $plan->id,
+                'started_at' => now(),
+                'expires_at' => $expiresAt,
+                'is_active' => true,
+            ]);
+        }
 
         $this->selectedUser = null;
         $this->plan_id = '';

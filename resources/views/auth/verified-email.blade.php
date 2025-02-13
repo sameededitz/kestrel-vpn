@@ -10,7 +10,7 @@
                     <div class="card-body py-80 px-32 text-center">
                         <img src="{{ asset('admin_assets/svg/verified.svg') }}" width="200px" alt="verify-img" class="mb-24">
                         <h6 class="mb-16">Email Verified Successfully</h6>
-                        <p class="text-secondary-light">Now you can Login!</p>
+                        <p class="text-secondary-light">Your email has been successfully verified! You can now access all features of your account.</p>
                     </div>
                 </div>
             </div>

@@ -14,14 +14,19 @@ Route::get('/', function () {
     return redirect()->route('login');
 })->name('home');
 
-Route::get('/optimize', function (Request $request) {
+Route::get('/optimize', function () {
     Artisan::call('optimize:clear');
     return 'Optimized';
 });
 
-Route::get('/storage-link', function (Request $request) {
+Route::get('/storage-link', function () {
     Artisan::call('storage:link');
     return 'Linked';
+});
+
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+    return 'Migrated';
 });
 
 Route::get('email/verify/view/{id}/{hash}', [VerifyController::class, 'viewEmail'])->name('email.verification.view');

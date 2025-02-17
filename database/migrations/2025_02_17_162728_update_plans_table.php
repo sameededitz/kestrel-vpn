@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('plans', function (Blueprint $table) {
-            $table->enum('duration_unit', ['day', 'week', 'month', 'year'])->default('day')->after('duration');
+            $table->dropColumn(['duration', 'duration_unit']);
+            $table->integer('duration')->nullable()->after('price');
+            $table->enum('duration_unit', ['day', 'week', 'month', 'year'])->nullable()->after('duration');
         });
     }
 
@@ -22,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('plans', function (Blueprint $table) {
-            $table->dropColumn('duration_unit');
+            $table->dropColumn(['duration', 'duration_unit']);
+            $table->integer('duration');
+            $table->enum('duration_unit', ['day', 'week', 'month', 'year']);
         });
     }
 };

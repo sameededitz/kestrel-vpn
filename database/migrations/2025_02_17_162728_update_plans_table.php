@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('plans', function (Blueprint $table) {
-            $table->dropColumn(['duration', 'duration_unit']);
+            $table->dropColumn('duration');
             $table->integer('duration')->nullable()->after('price');
             $table->enum('duration_unit', ['day', 'week', 'month', 'year'])->nullable()->after('duration');
         });

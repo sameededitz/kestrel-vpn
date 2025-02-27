@@ -7,8 +7,6 @@ use App\Http\Controllers\Api\SocialController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VerifyController;
 use App\Http\Controllers\OptionController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -25,6 +23,8 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'user'])->name('api.user');
+
+    Route::delete('/user/delete', [UserController::class, 'deleteUser'])->name('api.delete.user');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
 

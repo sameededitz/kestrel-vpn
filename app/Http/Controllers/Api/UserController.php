@@ -107,4 +107,15 @@ class UserController extends Controller
             ], 404);
         }
     }
+
+    public function deleteUser()
+    {
+        $user = Auth::user();
+        /** @var \App\Models\User $user **/
+        $user->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'User deleted successfully.',
+        ], 200);
+    }
 }
